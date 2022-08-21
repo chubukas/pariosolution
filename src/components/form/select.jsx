@@ -5,12 +5,6 @@ const Select = ({ onChange, name, required, selectData }) => {
         {name}
         {required && <span className="text-red-500 ml-2">*</span>}
       </div>
-      {required && (
-        <div className="text-[10px] text-slate-400 mb-2">
-          The purchase reciept would be sent to this address
-        </div>
-      )}
-
       <select
         className=" w-full h-8 border rounded-md pl-3 text-xs border-[#4E598C] bg-white"
         name={name.toLowerCase().split(" ").join("")}

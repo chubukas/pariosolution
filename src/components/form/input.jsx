@@ -5,7 +5,7 @@ const Input = ({ onChange, name, placeholder, type, required }) => {
         {name}
         {required && <span className="text-red-500 ml-2">*</span>}
       </div>
-      {required && (
+      {name.toLowerCase().includes("email") && (
         <div className="text-[10px] text-slate-400 mb-2">
           The purchase reciept would be sent to this address
         </div>
