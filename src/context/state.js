@@ -1,3 +1,3 @@
 export const initialState = {
-  active: "",
+  active: "Personal Info",
 };
