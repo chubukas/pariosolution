@@ -1,14 +1,13 @@
 import { useAppContext } from "../context";
 import { ACTIVE } from "../context/types";
-
-const hearderChange = ["Personal Info", "Billing Info", "Confirm Payment"];
+import { formTypes } from "./form/formTypes";
 
 const NavChange = () => {
   const [appState, dispatch] = useAppContext();
 
   const { active } = appState;
 
-  const mappedHeaders = hearderChange.map((data, i) => (
+  const mappedHeaders = Object.values(formTypes).map((data, i) => (
     <div
       key={i}
       className="cursor-pointer relative"
