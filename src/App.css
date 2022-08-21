@@ -1,3 +1,7 @@
 .background{
     background:-webkit-linear-gradient(-75deg, rgba(242,201,76,0.2) 55%, rgb(253, 255, 255) 0%);
 }
+
+.btn_bg{
+    background: linear-gradient(180deg, #F2C94C 0%, #F2994A 100%);
+}
