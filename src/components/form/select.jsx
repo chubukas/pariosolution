@@ -18,7 +18,11 @@ const Select = ({ onChange, name, required, selectData }) => {
         required={required}
       >
         {selectData &&
-          selectData.map((data) => <option value={data}>{data}</option>)}
+          selectData.map((data, i) => (
+            <option key={i} value={data}>
+              {data}
+            </option>
+          ))}
       </select>
     </div>
   );
