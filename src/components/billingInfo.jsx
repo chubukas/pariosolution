@@ -1,20 +1,46 @@
+import { useState, useEffect } from "react";
+
 import Input from "./form/input";
 import Select from "./form/select";
 import { cards } from "../data/cards";
 import BgButton from "./form/bgbutton";
 import TransButton from "./form/tranButton";
+import { useAppContext } from "../context";
+import { ACTIVE, INPUTDATA, CANCELPAYMENT } from "../context/types";
+import { formTypes } from "./form/formTypes";
 
 const BillingInfo = () => {
+  const [appState, dispatch] = useAppContext();
+
+  const { dataInputs } = appState;
+
+  const [inputs, setInputs] = useState({
+    nameoncard: "",
+    cardtype: "",
+    carddetails: "",
+    expirydate: "",
+    cvv: "",
+  });
+
+  useEffect(() => {
+    setInputs({
+      nameoncard: dataInputs.nameoncard,
+      cardtype: dataInputs.cardtype,
+      carddetails: dataInputs.carddetails,
+      expirydate: dataInputs.expirydate,
+      cvv: dataInputs.cvv,
+    });
+  }, [dataInputs]);
+
   const onInputChange = (e) => {
     const { name, value } = e.target;
-
-    console.log(name, value);
+    setInputs({ ...inputs, [name]: value });
   };
 
-  const onNext = (e) => {
-    e.preventDefault();
+  const onNext = () => {
+    dispatch({ type: INPUTDATA, payload: { ...inputs } });
+    dispatch({ type: ACTIVE, payload: formTypes.CONFIRMPAYMENT });
   };
-
   return (
     <div className="mb-12">
       <div className="mb-6">
@@ -24,6 +50,7 @@ const BillingInfo = () => {
           placeholder="Opara Linus Ahmed"
           type="text"
           required
+          value={inputs.nameoncard}
         />
       </div>
       <div className="mt-6">
@@ -32,6 +59,7 @@ const BillingInfo = () => {
           name="Card Type"
           selectData={cards}
           required
+          value={inputs.cardtype}
         />
       </div>
       <div className="mt-6 grid xl:grid-cols-5 gap-x-3">
@@ -42,6 +70,7 @@ const BillingInfo = () => {
             placeholder="44960 44960 44960 44960"
             type="text"
             required
+            value={inputs.carddetails}
           />
         </div>
 
@@ -53,6 +82,7 @@ const BillingInfo = () => {
               placeholder="04 / 23"
               type="text"
               required
+              value={inputs.expirydate}
             />
           </div>
           <div className="text-center mt-6 xl:mt-0">
@@ -62,6 +92,7 @@ const BillingInfo = () => {
               placeholder="923"
               type="text"
               required
+              value={inputs.cvv}
             />
           </div>
         </div>
@@ -71,7 +102,10 @@ const BillingInfo = () => {
           <BgButton name="Next" onclick={onNext} />
         </div>
         <div>
-          <TransButton name="Cancel Payment" onclick={onNext} />
+          <TransButton
+            name="Cancel Payment"
+            onclick={() => dispatch({ type: CANCELPAYMENT })}
+          />
         </div>
       </div>
     </div>
