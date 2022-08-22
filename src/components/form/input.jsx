@@ -1,4 +1,4 @@
-const Input = ({ onChange, name, placeholder, type, required }) => {
+const Input = ({ onChange, name, placeholder, type, required, value }) => {
   return (
     <div>
       <div className="text-xs font-semibold mb-2">
@@ -17,6 +17,7 @@ const Input = ({ onChange, name, placeholder, type, required }) => {
         placeholder={placeholder}
         onChange={onChange}
         required={required}
+        value={value}
       />
     </div>
   );
